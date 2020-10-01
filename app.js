@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { type } = require("os");
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -18,7 +19,7 @@ function init() {
 }
 
 function manager() {
-    console.log("Please enter the information of each of the members on your team, starting with your team mamnager.")
+    console.log("Please enter the information of each of the members on your team, starting with your team mamnager.");
     inquirer
         .prompt([
             {
@@ -46,20 +47,19 @@ function manager() {
             const manager = new Manager(data.name, data.id, data.email, data.office)
             console.log(manager);
             role();
-        })
-}
+        });
+};
 
 function role() {
     inquirer
         .prompt([
             {
                 type: "list",
-                message: "What is the role of your team member you are entering?",
                 name: "role",
+                message: "What is the role of your team member you are entering?",
                 choices: [
                     "Engineer",
                     "Intern",
-                    "I am done, my team is complete."
                 ]
             }
         ])
@@ -68,10 +68,106 @@ function role() {
                 engineer();
             } else if (data.role === "Intern") {
                 intern();
-            } else {
-                return
             }
-        })
+        });
+};
+
+function engineer() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the name of your engineer?"
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your engineer's ID number?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your engineers's email?"
+            },
+            {
+                type: "input",
+                name: "github",
+                message: "What is your engineers's GitHub username?"
+            }
+        ])
+        .then(function (data) {
+            const engineer = new Engineer(data.name, data.id, data.email, data.github)
+            console.log(engineer);
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        name: "complete",
+                        message: "Do you have more team members to add?",
+                        choices: [
+                            "Yes",
+                            "No",
+                        ]
+                    }
+                ])
+                .then(function (data) {
+                    if (data.complete === "Yes") {
+                        role();
+                    } else if (data.complete === "No") {
+                        return
+                    }
+                })
+        });
+}
+
+function intern() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the name of your intern?"
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your interns's ID number?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your interns's email?"
+            },
+            {
+                type: "input",
+                name: "github",
+                message: "Where does your intern attend school?"
+            }
+        ])
+        .then(function (data) {
+            const engineer = new Engineer(data.name, data.id, data.email, data.github)
+            console.log(engineer);
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        name: "complete",
+                        message: "Do you have more team members to add?",
+                        choices: [
+                            "Yes",
+                            "No",
+                        ]
+                    }
+                ])
+                .then(function (data) {
+                    if (data.complete === "Yes") {
+                        role();
+                    } else if (data.complete === "No") {
+                        return
+                    }
+                })
+        });
 }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
