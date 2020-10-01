@@ -14,10 +14,6 @@ const { type } = require("os");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-function init() {
-    manager();
-}
-
 function manager() {
     console.log("Please enter the information of each of the members on your team, starting with your team mamnager.");
     inquirer
@@ -51,12 +47,13 @@ function manager() {
 };
 
 function role() {
+    console.log("Add information for another team member.")
     inquirer
         .prompt([
             {
                 type: "list",
                 name: "role",
-                message: "What is the role of your team member you are entering?",
+                message: "What is the role of the team member you are entering?",
                 choices: [
                     "Engineer",
                     "Intern",
@@ -141,13 +138,13 @@ function intern() {
             },
             {
                 type: "input",
-                name: "github",
+                name: "school",
                 message: "Where does your intern attend school?"
             }
         ])
         .then(function (data) {
-            const engineer = new Engineer(data.name, data.id, data.email, data.github)
-            console.log(engineer);
+            const intern = new Intern(data.name, data.id, data.email, data.school)
+            console.log(intern);
             inquirer
                 .prompt([
                     {
@@ -189,4 +186,4 @@ function intern() {
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-init();
+manager();
