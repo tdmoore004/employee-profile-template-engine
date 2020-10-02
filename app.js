@@ -13,10 +13,7 @@ const { type } = require("os");
 
 const team = [];
 
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
+// Function for gathering info for team manager.
 function managerInfo() {
     console.log("Please enter the information of each of the members on your team, starting with your team mamnager.");
     inquirer
@@ -45,12 +42,11 @@ function managerInfo() {
         .then(function (data) {
             const manager = new Manager(data.name, data.id, data.email, data.office);
             team.push(manager);
-        })
-        .then(function () {
             roleInfo();
         });
 };
 
+// Function for determining role for other members of team.
 function roleInfo() {
     console.log("Add information for another team member.")
     inquirer
@@ -74,6 +70,7 @@ function roleInfo() {
         });
 };
 
+// Function for gathering info on engineer.
 function engineerInfo() {
     inquirer
         .prompt([
@@ -101,30 +98,29 @@ function engineerInfo() {
         .then(function (data) {
             const engineer = new Engineer(data.name, data.id, data.email, data.github);
             team.push(engineer);
-        })
-        .then(function () {
-        inquirer
-            .prompt([
-                {
-                    type: "list",
-                    name: "complete",
-                    message: "Do you have more team members to add?",
-                    choices: [
-                        "Yes",
-                        "No",
-                    ]
-                }
-            ])
-            .then(function (data) {
-                if (data.complete === "Yes") {
-                    roleInfo();
-                } else if (data.complete === "No") {
-                    renderInfo();
-                }
-            });
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        name: "complete",
+                        message: "Do you have more team members to add?",
+                        choices: [
+                            "Yes",
+                            "No",
+                        ]
+                    }
+                ])
+                .then(function (data) {
+                    if (data.complete === "Yes") {
+                        roleInfo();
+                    } else if (data.complete === "No") {
+                        writeToFile(outputPath, render(team));
+                    }
+                });
         });
 };
 
+// Function for gathering info on intern.
 function internInfo() {
     inquirer
         .prompt([
@@ -152,50 +148,40 @@ function internInfo() {
         .then(function (data) {
             const intern = new Intern(data.name, data.id, data.email, data.school);
             team.push(intern);
-        })
-        .then(function () {
-        inquirer
-            .prompt([
-                {
-                    type: "list",
-                    name: "complete",
-                    message: "Do you have more team members to add?",
-                    choices: [
-                        "Yes",
-                        "No",
-                    ]
-                }
-            ])
-            .then(function (data) {
-                if (data.complete === "Yes") {
-                    roleInfo();
-                } else if (data.complete === "No") {
-                    renderInfo();
-                }
-            });
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        name: "complete",
+                        message: "Do you have more team members to add?",
+                        choices: [
+                            "Yes",
+                            "No",
+                        ]
+                    }
+                ])
+                .then(function (data) {
+                    if (data.complete === "Yes") {
+                        roleInfo();
+                    } else if (data.complete === "No") {
+                        writeToFile(outputPath, render(team));
+                    }
+                });
         });
 };
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+// Function to write information gathered on team to team.html.
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function(err) {
+    
+        if (err) {
+          return console.log(err);
+        }
+      
+        console.log("HTML for team info created!");
+      
+      });
+}
 
-render(team);
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
+// Call for managerInfo function to initialize application.
 managerInfo();
