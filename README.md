@@ -20,11 +20,11 @@ Clone the repository to your device. After cloning repository run 'npm install' 
 
 ## Usage
 
-Run 'node app.js' in terminal or bash to prompt questions about team members.
-Input information for team manager first followed by information for each team member.
-For each team member begin with selecting their role, intern or engineer, followed by information.
-After entering team member information choose whether you have another team member to enter or if your team is complete.
-Once all team member information has been entered team.html file will be generated in 'output' folder.
+1. Run 'node app.js' in terminal or bash to prompt questions about team members.
+2. Input information for team manager first followed by information for each team member.
+3. For each team member begin with selecting their role, intern or engineer, followed by information.
+4. After entering team member information choose whether you have another team member to enter or if your team is complete.
+5. Once all team member information has been entered team.html file will be generated in 'output' folder.
 
 ## License
 
