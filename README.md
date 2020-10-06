@@ -16,11 +16,15 @@ e you wanting to create a webpage with all of your team members information, but
 
 ## Installation
 
-This project is currently not available to be installed besides clonning the repository to your device.
+Clone the repository to your device. After cloning repository run 'npm install' in same directory as index.js to install dev dependencies.
 
 ## Usage
 
-This app is for those team managers or supervisors who want to create a webpage to display all of their team members info, but don't want to take the time to create the page themselves.
+Run 'node app.js' in terminal or bash to prompt questions about team members.
+Input information for team manager first followed by information for each team member.
+For each team member begin with selecting their role, intern or engineer, followed by information.
+After entering team member information choose whether you have another team member to enter or if your team is complete.
+Once all team member information has been entered team.html file will be generated in 'output' folder.
 
 ## License
 
