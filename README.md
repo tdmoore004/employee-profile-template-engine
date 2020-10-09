@@ -36,7 +36,7 @@ For repository or clone to your device. For larger contributions create an issue
 
 ## Tests
 
-There are not any tests associated with this application.
+There are tests for each individual position class that was created including manager, engineer, intern and overall employee. Each test is looking to ensure that the correct data is coming through when a new instance of a class is created.
 
 ## Questions
 
