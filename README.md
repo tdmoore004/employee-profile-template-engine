@@ -32,7 +32,7 @@ Clone the repository to your device. After cloning repository run 'npm install' 
 
 ## Contributing
 
-For repository or clone to your device. For larger contributions create an issue to descirbe the contribution you are adding.
+Fork repository or clone to your device. For larger contributions create an issue to descirbe the contribution you are adding.
 
 ## Tests
 
