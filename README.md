@@ -20,7 +20,7 @@ Clone the repository to your device. After cloning repository run ```npm install
 
 ## Usage
 
-[Screen recording of app in use.](https://drive.google.com/file/d/1sZVbn8iQj1ZpBMN99HEiPSDNetDKRFD4/view)
+[Screen recording of app in use.](https://drive.google.com/file/d/1-uNvmdzpI1I3CbyK7emRxMaYOBBAtUIW/view)
 1. Run ```node app.js``` in terminal or bash to prompt questions about team members.
 2. Input information for team manager first followed by information for each team member.
 3. For each team member begin with selecting their role, intern or engineer, followed by information.
